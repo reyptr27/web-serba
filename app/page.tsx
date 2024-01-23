@@ -5,7 +5,7 @@ export const revalidate = 86400;
 
 export default function Home() {
   return (
-    <main className="px-4 md:px-6 prose prose-xl prose-slate dark:prose-invert mx-auto">
+    <main className="min-h-screen flex flex-col">
       <div className="mx-auto">
         <MyProfile />
         <p className="mt-12 mb-12 text-3xl text-center dark:text-white">
@@ -14,7 +14,6 @@ export default function Home() {
             I'm <span className="font-bold">Reynaldo</span>.
           </span>
         </p>
-        {/* @ts-expect-error Server Component */}
         <Posts />
       </div>
     </main>

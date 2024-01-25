@@ -14,7 +14,7 @@ type Filetree = {
 };
 
 export async function getPostByName(fileName: string): Promise<BlogPost | undefined> {
-  const blogPost = await fetch(`https://raw.githubusercontent.com/gitdagray/web-serba-contents/main/${fileName}`, {
+  const blogPost = await fetch(`https://raw.githubusercontent.com/reyptr27/web-serba-contents/master/${fileName}`, {
     headers: {
       Accept: "application/vnd.github+json",
       Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
@@ -59,7 +59,7 @@ export async function getPostByName(fileName: string): Promise<BlogPost | undefi
 }
 
 export async function getPostsMeta(): Promise<Meta[] | undefined> {
-  const postMeta = await fetch("https://api.github.com/repos/gitdagray/web-serba-contents/git/trees/main?recursive=1", {
+  const postMeta = await fetch("https://api.github.com/repos/reyptr27/web-serba-contents/git/trees/master?recursive=1", {
     headers: {
       Accept: "application/vnd.github+json",
       Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,

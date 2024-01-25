@@ -77,7 +77,7 @@ export default function MobileCategoryTag() {
             {/* hamburger button */}
             <span className={clsx("h-0.5 w-full dark:bg-gray-50 bg-gray-700 rounded-lg cursor-pointer transform transition duration-300 ease-in-out", { "rotate-45 translate-y-[7px]": open })} />
 
-            <span className={clsx("h-0.5 w-full dark:bg-gray-50 bg-gray-700 rounded-lg cursor-pointer transition-all duration-300 ease-in-out", { "w-0": open, "w-full": !open })} />
+            <span className={clsx("h-0.5 w-full dark:bg-gray-50 bg-gray-700 rounded-lg cursor-pointer transition-all duration-300 ease-in-out", { "opacity-0": open, "opacity-100": !open })} />
 
             <span className={clsx("h-0.5 w-full dark:bg-gray-50 bg-gray-700 rounded-lg cursor-pointer transform transition duration-300 ease-in-out", { "-rotate-45 -translate-y-[7px]": open })} />
           </div>

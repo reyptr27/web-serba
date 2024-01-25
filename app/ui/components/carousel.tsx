@@ -1,7 +1,7 @@
 "use client";
 
 import clsx from "clsx";
-import { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import { BiArrowToLeft, BiArrowToRight, BiCircle } from "react-icons/bi";
 import { Each } from "@/app/each";
 
@@ -47,9 +47,9 @@ export default function Carousel() {
     setCurrentIndex((prevIndex) => (prevIndex - 1 + totalSlides) % totalSlides);
   };
 
-  const nextSlide = () => {
+  const nextSlide = useCallback(() => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % totalSlides);
-  };
+  }, [totalSlides]);
 
   const goToSlide = (slideIndex: number) => {
     setCurrentIndex(Math.max(minIndex, Math.min(maxIndex, slideIndex)));
@@ -87,7 +87,7 @@ export default function Carousel() {
       // Clear the interval when the component unmounts
       clearInterval(intervalId);
     };
-  }, [currentIndex]);
+  }, [currentIndex, nextSlide]);
 
   return (
     <>

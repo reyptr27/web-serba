@@ -1,10 +1,10 @@
 import { Children, ReactNode } from "react";
 
-interface EachProps<Item> {
-  render: (item: Item, index: number) => ReactNode;
-  of: Item[];
+interface EachProps<Content> {
+  render: (item: Content, index: number) => ReactNode;
+  of: Content[];
 }
 
-export const Each = <Item,>({ render, of }: EachProps<Item>) => {
+export const Each = <Content,>({ render, of }: EachProps<Content>) => {
   return Children.toArray(of.map((item, index) => render(item, index)));
 };

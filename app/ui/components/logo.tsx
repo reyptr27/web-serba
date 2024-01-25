@@ -4,15 +4,16 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 import { useTheme } from "next-themes";
 import Link from "next/link";
+import { BiSync } from "react-icons/bi";
 
-export default function ThemeSwitcher() {
+export default function Logo() {
   const [mounted, setMounted] = useState(false);
   const { resolvedTheme } = useTheme();
 
   useEffect(() => setMounted(true), []);
 
   if (!mounted) {
-    return <h1 className="text-gray-700 dark:text-gray-50">Logo</h1>;
+    return <BiSync className="text-2xl cursor-pointer text-gray-700 dark:text-gray-50" />;
   }
 
   if (resolvedTheme === "light") {

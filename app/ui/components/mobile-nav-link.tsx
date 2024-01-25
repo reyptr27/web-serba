@@ -4,6 +4,7 @@ import { BiHome, BiBookHeart, BiNews, BiCloudDownload } from "react-icons/bi";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import clsx from "clsx";
+import { Each } from "@/app/each";
 
 const links = [
   { name: "Home", href: "/", icon: BiHome },
@@ -12,13 +13,43 @@ const links = [
   { name: "Download", href: "/download", icon: BiCloudDownload },
 ];
 
-export default function Mobilenavlink() {
+export default function MobileNavLink() {
   const pathname = usePathname();
-
   return (
     <>
-      <div>
-        <p>mobile nav</p>
+      <div className="lg:hidden z-20 fixed bottom-0 py-3 px-5 rounded-t-xl flex flex-row w-full mx-auto bg-gray-50 dark:bg-[#091a28] border-t-[1px] border-solid border-[#e2ecec] dark:border-[#0d2538] transition-colors duration-300">
+        <Each
+          of={links}
+          render={(link) => {
+            const LinkIcon = link.icon;
+            return (
+              <Link
+                key={link.name}
+                href={link.href}
+                className={clsx("flex justify-center items-center grow py-2 px-3 cursor-pointer transition-all duration-200 ease-out", {
+                  "bg-green-700/40 dark:bg-green-600/30 rounded-full justify-start": pathname === link.href,
+                  "bg-none": pathname !== link.href,
+                })}
+              >
+                <LinkIcon
+                  className={clsx("inline text-xl transition-colors duration-300", {
+                    "text-green-700 dark:text-green-600": pathname === link.href,
+                    "text-gray-700 dark:text-gray-50": pathname !== link.href,
+                  })}
+                />
+                &nbsp;
+                <span
+                  className={clsx("text-md m-auto text-center font-semibold transition-all duration-300 ease-in", {
+                    "inline-block text-gray-50 dark:text-gray-50": pathname === link.href,
+                    hidden: pathname !== link.href,
+                  })}
+                >
+                  {link.name}
+                </span>
+              </Link>
+            );
+          }}
+        />
       </div>
     </>
   );

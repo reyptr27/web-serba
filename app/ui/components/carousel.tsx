@@ -3,6 +3,7 @@
 import clsx from "clsx";
 import { useState, useEffect, useRef } from "react";
 import { BiArrowToLeft, BiArrowToRight, BiCircle } from "react-icons/bi";
+import { Each } from "@/app/each";
 
 // Max 7 content
 const slides = [
@@ -104,18 +105,21 @@ export default function Carousel() {
         </div>
 
         <div className="flex justify-center gap-3 md:gap-7 py-5 transition duration-300">
-          {slidesToShow.map((_, slideIndex) => (
-            <div
-              key={slideIndex}
-              onClick={() => goToSlide(slideIndex)}
-              className={clsx("text-green-700 dark:text-green-600 sm:text-xs md:text-lg xl:text-xl cursor-pointer transition duration-300", {
-                "bg-green-700 dark:bg-green-600 rounded-full": slideIndex === currentIndex,
-                "bg-gray-50 dark:bg-[#091a28] rounded-full opacity-40": slideIndex !== currentIndex,
-              })}
-            >
-              <BiCircle />
-            </div>
-          ))}
+          <Each
+            of={slidesToShow}
+            render={(_, slideIndex) => (
+              <div
+                key={slideIndex}
+                onClick={() => goToSlide(slideIndex)}
+                className={clsx("text-green-700 dark:text-green-600 sm:text-xs md:text-lg xl:text-xl cursor-pointer transition duration-300", {
+                  "bg-green-700 dark:bg-green-600 rounded-full": slideIndex === currentIndex,
+                  "bg-gray-50 dark:bg-[#091a28] rounded-full opacity-40": slideIndex !== currentIndex,
+                })}
+              >
+                <BiCircle />
+              </div>
+            )}
+          />
         </div>
       </div>
     </>

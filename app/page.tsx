@@ -11,7 +11,7 @@ export default function Home() {
         <p className="mt-12 mb-12 text-3xl text-center dark:text-white">
           Hello and Welcome 👋&nbsp;
           <span className="whitespace-nowrap">
-            I'm <span className="font-bold">Reynaldo</span>.
+            To <span className="font-bold">Web Serba</span>.
           </span>
         </p>
         <Posts />

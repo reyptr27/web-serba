@@ -1,6 +1,7 @@
 import Carousel from "@/app/ui/components/carousel";
 import Posts from "@/app/ui/components/posts";
-import Mobilecategorytag from "@/app/ui/components/mobile-category-tag";
+import { Suspense } from "react";
+import Loading from "@/app/ui/components/loading";
 
 export default function Blog() {
   return (
@@ -21,16 +22,14 @@ export default function Blog() {
                     <button className="text-gray-700 dark:text-gray-50 py-4">Latest</button>
                     <button className="text-green-700 dark:text-green-600 py-4 border-b border-green-700 dark:border-green-600">Oldest</button>
                   </div>
-                  <span className="cursor-pointer block md:hidden ml-auto">
-                    <Mobilecategorytag />
-                  </span>
                 </div>
               </div>
               {/* Content */}
-              <div className="px-7">
-                <Posts />
-                <div className="flex justify-center pt-20 ">{/* <Loader /> */}</div>
-              </div>
+              <Suspense fallback={<Loading />}>
+                <div className="px-7 md:pb-20">
+                  <Posts />
+                </div>
+              </Suspense>
               {/* end content */}
             </div>
             {/* Sidebar - uses 3 col span */}

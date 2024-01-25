@@ -1,6 +1,6 @@
 import { getPostsMeta } from "@/lib/posts";
 import { Each } from "@/app/each";
-import ListItem from "@/app/ui/components/list-item";
+import ListItem from "@/app/ui/components/list-posts";
 
 export default async function Posts() {
   const posts = await getPostsMeta();

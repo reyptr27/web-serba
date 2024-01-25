@@ -1,5 +1,5 @@
 import { getPostsMeta } from "@/lib/posts";
-import ListItem from "@/app/ui/components/list-item";
+import ListItem from "@/app/ui/components/list-posts";
 import Link from "next/link";
 
 export const revalidate = 86400;

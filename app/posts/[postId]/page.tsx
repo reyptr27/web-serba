@@ -1,4 +1,4 @@
-import getFormattedDate from "@/lib/get-formatted-date";
+import GetFormattedDate from "@/lib/get-formatted-date";
 import { getPostsMeta, getPostByName } from "@/lib/posts";
 import { notFound } from "next/navigation";
 import Link from "next/link";
@@ -43,7 +43,7 @@ export default async function Post({ params: { postId } }: Props) {
 
   const { meta, content } = post;
 
-  const pubDate = getFormattedDate(meta.date);
+  const pubDate = GetFormattedDate(meta.date);
 
   const tags = meta.tags.map((tag, i) => (
     <Link key={i} href={`/tags/${tag}`}>

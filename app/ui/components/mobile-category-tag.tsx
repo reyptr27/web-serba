@@ -76,7 +76,7 @@ export default function MobileCategoryTag() {
           >
             {/* hamburger button */}
             <span className={`h-0.5 w-full dark:bg-gray-50 bg-gray-700 rounded-lg cursor-pointer transform transition duration-300 ease-in-out ${open ? "rotate-45 translate-y-[7px]" : ""}`} />
-            <span className={`h-0.5 w-full dark:bg-gray-50 bg-gray-700 rounded-lg cursor-pointer transition-all duration-300 ease-in-out ${open ? "w-0" : "w-full"}`} />
+            <span className={`h-0.5 w-full dark:bg-gray-50 bg-gray-700 rounded-lg cursor-pointer transition-all duration-300 ease-in-out ${open ? "hidden" : "w-full"}`} />
             <span className={`h-0.5 w-full dark:bg-gray-50 bg-gray-700 rounded-lg cursor-pointer transform transition duration-300 ease-in-out ${open ? "-rotate-45 -translate-y-[7px]" : ""}`} />
           </div>
         </div>

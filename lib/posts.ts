@@ -1,7 +1,8 @@
+// lib/posts.ts
 import { compileMDX } from "next-mdx-remote/rsc";
+import rehypeAutolinkHeadings from "rehype-autolink-headings/lib";
+import rehypeHighlight from "rehype-highlight/lib";
 import rehypeSlug from "rehype-slug";
-import rehypeAutolinkHeadings from "rehype-autolink-headings";
-import rehypeHighlight from "rehype-highlight";
 import Video from "@/app/ui/components/video";
 import CustomImage from "@/app/ui/components/custom-image";
 
@@ -13,8 +14,10 @@ type Filetree = {
   ];
 };
 
-export async function getPostByName(fileName: string): Promise<BlogPost | undefined> {
-  const blogPost = await fetch(`https://raw.githubusercontent.com/reyptr27/web-serba-contents/master/${fileName}`, {
+export async function getPostByPath( postType:string, fileName: string ): Promise<Post | undefined> {
+  
+  const postUrl = postType === "tutorial" ? "tutorial" : "blog";
+  const res = await fetch(`https://raw.githubusercontent.com/reyptr27/${postUrl}-posts/master/${fileName}`, {
     headers: {
       Accept: "application/vnd.github+json",
       Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
@@ -22,9 +25,9 @@ export async function getPostByName(fileName: string): Promise<BlogPost | undefi
     },
   });
 
-  if (!blogPost.ok) return undefined;
+  if (!res.ok) return undefined;
 
-  const rawMDX = await blogPost.text();
+  const rawMDX = await res.text();
 
   if (rawMDX === "404: Not Found") return undefined;
 
@@ -53,13 +56,15 @@ export async function getPostByName(fileName: string): Promise<BlogPost | undefi
 
   const id = fileName.replace(/\.mdx$/, "");
 
-  const blogPostObj: BlogPost = { meta: { id, title: frontmatter.title, date: frontmatter.date, tags: frontmatter.tags }, content };
+  const postObj: Post = { meta: { id, title: frontmatter.title, date: frontmatter.date, tags: frontmatter.tags }, content };
 
-  return blogPostObj;
+  return postObj;
 }
 
-export async function getPostsMeta(): Promise<Meta[] | undefined> {
-  const postMeta = await fetch("https://api.github.com/repos/reyptr27/web-serba-contents/git/trees/master?recursive=1", {
+export async function getPostsMeta(postType: string): Promise<Meta[] | undefined> {
+ 
+  const postUrl = postType === "tutorial" ? "tutorial" : "blog";
+  const res = await fetch(`https://api.github.com/repos/reyptr27/${postUrl}-posts/git/trees/master?recursive=1`, {
     headers: {
       Accept: "application/vnd.github+json",
       Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
@@ -67,16 +72,16 @@ export async function getPostsMeta(): Promise<Meta[] | undefined> {
     },
   });
 
-  if (!postMeta.ok) return undefined;
+  if (!res.ok) return undefined;
 
-  const repoFiletree: Filetree = await postMeta.json();
+  const repoFiletree: Filetree = await res.json();
 
   const filesArray = repoFiletree.tree.map((obj) => obj.path).filter((path) => path.endsWith(".mdx"));
 
   const posts: Meta[] = [];
 
   for (const file of filesArray) {
-    const post = await getPostByName(file);
+    const post = await getPostByPath(postType, file);
     if (post) {
       const { meta } = post;
       posts.push(meta);

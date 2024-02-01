@@ -22,26 +22,28 @@ export default function MobileNavLink() {
           of={links}
           render={(link) => {
             const LinkIcon = link.icon;
+            const isActive = pathname === link.href || pathname.startsWith(`${link.href}/`);
             return (
               <Link
                 key={link.name}
                 href={link.href}
+                aria-label={link.name}
                 className={clsx("flex justify-center items-center grow py-2 px-3 cursor-pointer transition-all duration-200 ease-out", {
-                  "bg-green-700/40 dark:bg-green-600/30 rounded-full justify-start": pathname === link.href,
-                  "bg-none": pathname !== link.href,
+                  "bg-green-700/60 dark:bg-green-600/40 rounded-full justify-start": isActive,
+                  "bg-none": !isActive,
                 })}
               >
                 <LinkIcon
                   className={clsx("inline text-xl transition-colors duration-300", {
-                    "text-green-700 dark:text-green-600": pathname === link.href,
-                    "text-gray-700 dark:text-gray-50": pathname !== link.href,
+                    "text-green-700 dark:text-green-600": isActive,
+                    "text-gray-700 dark:text-gray-50": !isActive,
                   })}
                 />
                 &nbsp;
                 <span
                   className={clsx("text-md m-auto text-center font-semibold transition-all duration-300 ease-in", {
-                    "inline-block text-gray-50 dark:text-gray-50": pathname === link.href,
-                    hidden: pathname !== link.href,
+                    "inline-block text-gray-50 dark:text-gray-50": isActive,
+                    hidden: !isActive,
                   })}
                 >
                   {link.name}

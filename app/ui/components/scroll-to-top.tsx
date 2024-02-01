@@ -31,7 +31,7 @@ export default function ScrollToTop() {
   return (
     <>
       {isVisible && (
-        <button onClick={scrollToTop} className="z-30 fixed cursor-pointer bottom-[120px] lg:bottom-[80px] right-[20px] p-2 bg-green-700/70 md:bg-green-700 rounded-full items-center">
+        <button onClick={scrollToTop} className="z-30 fixed cursor-pointer bottom-[80px] lg:bottom-[80px] right-[20px] p-2 bg-green-700/70 md:bg-green-700 rounded-full items-center">
           <BiArrowToTop className="text-3xl md:text-4xl lg:text-5xl text-white" />
         </button>
       )}

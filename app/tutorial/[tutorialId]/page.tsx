@@ -1,5 +1,5 @@
 import GetFormattedDate from "@/lib/get-formatted-date";
-import { getPostsMeta, getPostByName } from "@/lib/posts";
+import { getPostsMeta, getPostByPath } from "@/lib/posts";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import "highlight.js/styles/github-dark.css";
@@ -8,22 +8,22 @@ export const revalidate = 86400;
 
 type Props = {
   params: {
-    postId: string;
+    tutorialId: string;
   };
 };
 
 export async function generateStaticParams() {
-  const posts = await getPostsMeta(); //deduped!
+  const posts = await getPostsMeta("tutorial"); //deduped!
 
   if (!posts) return [];
 
   return posts.map((post) => ({
-    postId: post.id,
+    tutorialId: post.id,
   }));
 }
 
-export async function generateMetadata({ params: { postId } }: Props) {
-  const post = await getPostByName(`${postId}.mdx`); //deduped!
+export async function generateMetadata({ params: { tutorialId } }: Props) {
+  const post = await getPostByPath("tutorial", `${tutorialId}.mdx`); //deduped!
 
   if (!post) {
     return {
@@ -36,8 +36,8 @@ export async function generateMetadata({ params: { postId } }: Props) {
   };
 }
 
-export default async function Post({ params: { postId } }: Props) {
-  const post = await getPostByName(`${postId}.mdx`); //deduped!
+export default async function Post({ params: { tutorialId } }: Props) {
+  const post = await getPostByPath("tutorial", `${tutorialId}.mdx`); //deduped!
 
   if (!post) notFound();
 
@@ -61,7 +61,7 @@ export default async function Post({ params: { postId } }: Props) {
         <div className="flex flex-row gap-4">{tags}</div>
       </section>
       <p className="mb-10">
-        <Link href="/">← Back to home</Link>
+        <Link href="/tutorial">← Back</Link>
       </p>
     </>
   );

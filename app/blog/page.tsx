@@ -20,9 +20,9 @@ export default function Blog() {
               <div id="carousel" className="px-3 lg:px-7 pt-5 pb-6">
                 <Carousel />
               </div>
-              <div id="post" className="z-10 sticky top-14 md:top-[69px] md:pt-8 px-2 md:px-3 lg:px-7 py-1 md:py-4 bg-gray-50 dark:bg-[#091a28] transition duration-300">
-                <div className="flex justify-between items-center border-b border-[#e2ecec] dark:border-[#0d2538] transition duration-300 p-2">
-                  <div id="filter-post" className="flex items-center space-x-4 font-semibold text-md md:text-xl">
+              <div id="post" className="z-10 sticky top-14 md:top-[69px] px-2 md:px-3 lg:px-7 py-1 bg-gray-50 dark:bg-[#091a28] transition duration-300">
+                <div className="flex justify-between items-center border-b border-[#e2ecec] dark:border-[#0d2538] transition duration-300 p-2 md:p-0">
+                  <div id="filter-post" className="flex items-center space-x-4 font-semibold text-sm md:text-lg">
                     <button className="text-gray-700 dark:text-gray-50 py-4">Latest</button>
                     <button className="text-green-700 dark:text-green-600 py-4 border-b border-green-700 dark:border-green-600">Oldest</button>
                   </div>

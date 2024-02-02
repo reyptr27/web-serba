@@ -1,9 +1,10 @@
 type Meta = {
-    id: string,
-    title: string,
-    date: string,
-    tags: string[],
-}
+  id: string;
+  title: string;
+  date: string;
+  tags: string[];
+  image?: string;
+};
 
 type Post = {
     meta: Meta,

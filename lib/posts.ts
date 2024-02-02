@@ -31,7 +31,7 @@ export async function getPostByPath( postType:string, fileName: string ): Promis
 
   if (rawMDX === "404: Not Found") return undefined;
 
-  const { frontmatter, content } = await compileMDX<{ title: string; date: string; tags: string[] }>({
+  const { frontmatter, content } = await compileMDX<{ title: string; date: string; tags: string[]; image?: string }>({
     source: rawMDX,
     components: {
       Video,
@@ -56,7 +56,7 @@ export async function getPostByPath( postType:string, fileName: string ): Promis
 
   const id = fileName.replace(/\.mdx$/, "");
 
-  const postObj: Post = { meta: { id, title: frontmatter.title, date: frontmatter.date, tags: frontmatter.tags }, content };
+  const postObj: Post = { meta: { id, title: frontmatter.title, date: frontmatter.date, tags: frontmatter.tags, image: frontmatter.image }, content };
 
   return postObj;
 }

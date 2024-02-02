@@ -43,11 +43,11 @@ export default async function Post({ params: { blogId } }: Props) {
 
   const { meta, content } = post;
 
-  const pubDate = GetFormattedDate(meta.date);
+  const pubDate = GetFormattedDate(meta?.date);
 
-  const tags = meta.tags.map((tag, i) => (
-    <Link key={i} href={`/tags/${tag}`}>
-      {tag}
+  const blogTags = meta.tags.map((blogTag, i) => (
+    <Link key={i} href={`/blog-tags/${blogTag}`}>
+      {blogTag}
     </Link>
   ));
 
@@ -58,10 +58,10 @@ export default async function Post({ params: { blogId } }: Props) {
       <article>{content}</article>
       <section>
         <h3>Related:</h3>
-        <div className="flex flex-row gap-4">{tags}</div>
+        <div className="flex flex-row gap-4">{blogTags}</div>
       </section>
       <p className="mb-10">
-        <Link href="/blog">← Back</Link>
+        <Link href="/blog">← Back to Blog</Link>
       </p>
     </>
   );

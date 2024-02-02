@@ -14,7 +14,7 @@ export default function Home() {
             To <span className="font-bold">Web Serba</span>.
           </span>
         </p>
-        <Posts />
+        <Posts postType={"blog"} />
       </div>
     </main>
   );

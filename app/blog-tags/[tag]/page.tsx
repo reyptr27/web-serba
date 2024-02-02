@@ -5,14 +5,13 @@ import Link from "next/link";
 export const revalidate = 86400;
 
 type Props = {
-  postType: string;
   params: {
     tag: string;
   };
 };
 
-export async function generateStaticParams({ postType }: Props) {
-  const posts = await getPostsMeta(postType); //deduped!
+export async function generateStaticParams() {
+  const posts = await getPostsMeta("blog"); //deduped!
 
   if (!posts) return [];
 
@@ -21,14 +20,14 @@ export async function generateStaticParams({ postType }: Props) {
   return Array.from(tags).map((tag) => ({ tag }));
 }
 
-export function generateTutorialMetadata({ params: { tag } }: Props) {
+export function generateMetadata({ params: { tag } }: Props) {
   return {
-    title: `Posts about ${tag}`,
+    title: `BLog posts about ${tag}`,
   };
 }
 
-export default async function TagTutorialPostList({ postType, params: { tag } }: Props) {
-  const posts = await getPostsMeta(postType); //deduped!
+export default async function TagPostList({ params: { tag } }: Props) {
+  const posts = await getPostsMeta("blog"); //deduped!
 
   if (!posts) return <p className="mt-10 text-center">Sorry, no posts available.</p>;
 
@@ -38,7 +37,7 @@ export default async function TagTutorialPostList({ postType, params: { tag } }:
     return (
       <div className="text-center">
         <p className="mt-10">Sorry, no posts for that keyword.</p>
-        <Link href="/">Back to Home</Link>
+        <Link href="/blog">Back to BLog</Link>
       </div>
     );
   }
@@ -49,7 +48,7 @@ export default async function TagTutorialPostList({ postType, params: { tag } }:
       <section className="mt-6 mx-auto max-w-2xl">
         <ul className="w-full list-none p-0">
           {tagPosts.map((post) => (
-            <ListPosts key={post.id} post={post} postType={postType} />
+            <ListPosts key={post.id} post={post} postType={"blog"} />
           ))}
         </ul>
       </section>

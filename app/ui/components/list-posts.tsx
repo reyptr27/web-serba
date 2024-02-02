@@ -14,8 +14,8 @@ export default function ListPosts({ post, postType }: Props) {
 
   return (
     <>
-      <div className="w-full md:w-60 p-4 bg-gray-50 dark:bg-[#091a28] border border-[#e2ecec] dark:border-[#0d2538] rounded-xl transform transition-all hover:-translate-y-2 duration-300 shadow-lg hover:shadow-2xl">
-        <Image className="h-40 w-full object-fit rounded-xl" src={image || "/no-image.svg"} width={0} height={0} alt={title} priority={true} unoptimized/>
+      <div className="w-72 md:w-60 p-4 bg-gray-50 dark:bg-[#091a28] border border-[#e2ecec] dark:border-[#0d2538] rounded-xl transform transition-all hover:-translate-y-2 duration-300 shadow-lg hover:shadow-2xl">
+        <Image className="h-40 w-full object-fit rounded-xl" src={image || "/no-image.svg"} width={0} height={0} alt={title} priority={true} unoptimized />
         <div className="p-2">
           <h2 className="font-bold text-gray-700 dark:text-gray-50 text-md pt-1">{title.length > 20 ? `${title.substring(0, 20)} ...` : title}</h2>
           <p className="text-xs text-gray-700 dark:text-gray-50/60 mb-2">{formattedDate}</p>

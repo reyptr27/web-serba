@@ -1,7 +1,8 @@
-import GetFormattedDate from "@/lib/get-formatted-date";
+import getFormattedDate from "@/lib/get-formatted-date";
 import { getPostsMeta, getPostByPath } from "@/lib/posts";
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import { Each } from "@/app/each";
 import "highlight.js/styles/github-dark.css";
 
 export const revalidate = 86400;
@@ -37,19 +38,24 @@ export async function generateMetadata({ params: { tutorialId } }: Props) {
 }
 
 export default async function Post({ params: { tutorialId } }: Props) {
-  const post = await getPostByPath("tutorial", `${tutorialId}.mdx`); //deduped!
+  const post = await getPostByPath("tutorial", `${tutorialId}.mdx`);
 
   if (!post) notFound();
 
   const { meta, content } = post;
 
-  const pubDate = GetFormattedDate(meta?.date);
+  const pubDate = getFormattedDate(meta?.date);
 
-  const tutorialTags = meta.tags.map((tutorialTag, i) => (
-    <Link key={i} href={`/tutorial-tags/${tutorialTag}`}>
-      {tutorialTag}
-    </Link>
-  ));
+  const tutorialTags = (
+    <Each
+      of={meta.tags}
+      render={(tutorialTag, i) => (
+        <Link key={i} href={`/tutorial-tags/${tutorialTag}`}>
+          {tutorialTag}
+        </Link>
+      )}
+    />
+  );
 
   return (
     <>

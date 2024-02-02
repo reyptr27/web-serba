@@ -22,7 +22,19 @@ export default function MobileNavLink() {
           of={links}
           render={(link) => {
             const LinkIcon = link.icon;
-            const isActive = pathname === link.href || pathname.startsWith(`${link.href}/`);
+            let isActive = pathname === link.href || pathname.startsWith(`${link.href}/`);
+
+            // Menyesuaikan logika isActive berdasarkan jenis halaman
+            if (link.href === "/blog" && pathname.startsWith("/blog")) {
+              isActive = true; // Aktif jika di halaman blog utama atau di bawahnya
+            } else if (link.href === "/tutorial" && pathname.startsWith("/tutorial")) {
+              isActive = true; // Aktif jika di halaman tutorial utama atau di bawahnya
+            } else if (link.href === "/blog-tags" && pathname.startsWith("/blog-tags")) {
+              isActive = true; // Aktif jika di halaman blog-tags utama atau di bawahnya
+            } else if (link.href === "/tutorial-tags" && pathname.startsWith("/tutorial-tags")) {
+              isActive = true; // Aktif jika di halaman tutorial-tags utama atau di bawahnya
+            }
+
             return (
               <Link
                 key={link.name}

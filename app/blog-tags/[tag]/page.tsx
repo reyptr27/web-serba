@@ -1,6 +1,7 @@
 import { getPostsMeta } from "@/lib/posts";
 import ListPosts from "@/app/ui/components/list-posts";
 import Link from "next/link";
+import { Each } from "@/app/each";
 
 export const revalidate = 86400;
 
@@ -47,9 +48,7 @@ export default async function TagPostList({ params: { tag } }: Props) {
       <h2 className="text-3xl mt-4 mb-0">Results for: #{tag}</h2>
       <section className="mt-6 mx-auto max-w-2xl">
         <ul className="w-full list-none p-0">
-          {tagPosts.map((post) => (
-            <ListPosts key={post.id} post={post} postType={"blog"} />
-          ))}
+          <Each of={tagPosts} render={(post) => <ListPosts key={post.id} post={post} postType={"blog"} />} />
         </ul>
       </section>
     </>

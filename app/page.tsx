@@ -1,5 +1,4 @@
 import MyProfile from "@/app/ui/components/my-profile";
-import Posts from "@/app/ui/components/posts";
 
 export const revalidate = 86400;
 
@@ -14,7 +13,6 @@ export default function Home() {
             To <span className="font-bold">Web Serba</span>.
           </span>
         </p>
-        <Posts postType={"blog"} />
       </div>
     </main>
   );

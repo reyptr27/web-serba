@@ -1,6 +1,6 @@
-// components/posts.tsx
 import { getPostsMeta } from "@/lib/posts";
 import ListPosts from "@/app/ui/components/list-posts";
+import { Each } from "@/app/each";
 
 type Props = {
   postType: string; 
@@ -14,13 +14,19 @@ export default async function Posts({ postType }: Props) {
   }
 
   return (
-    <section className="mt-6 mx-auto max-w-2xl">
-      <h2 className="text-4xl font-bold dark:text-white/90">{postType === "tutorial" ? "Tutorials" : "Blogs"}</h2>
-      <ul className="w-full list-none p-0">
-        {posts.map((post) => (
-          <ListPosts key={post.id} post={post} postType={postType} />
-        ))}
-      </ul>
-    </section>
+    <>
+      <section className="mt-6 mx-auto w-full">
+        <div className="flex flex-wrap gap-4 md:gap-6 justify-center md:justify-start ">
+          <Each
+            of={posts}
+            render={(post) => (
+              <div key={post.id} className="px-1 md:px-0">
+                <ListPosts post={post} postType={postType} />
+              </div>
+            )}
+          />
+        </div>
+      </section>
+    </>
   );
 }

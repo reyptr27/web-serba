@@ -1,6 +1,7 @@
-import GetFormattedDate from "@/lib/get-formatted-date";
+import getFormattedDate from "@/lib/get-formatted-date";
 import { getPostsMeta, getPostByPath } from "@/lib/posts";
 import { notFound } from "next/navigation";
+import { Each } from "@/app/each";
 import Link from "next/link";
 import "highlight.js/styles/github-dark.css";
 
@@ -43,13 +44,18 @@ export default async function Post({ params: { blogId } }: Props) {
 
   const { meta, content } = post;
 
-  const pubDate = GetFormattedDate(meta?.date);
+  const pubDate = getFormattedDate(meta?.date);
 
-  const blogTags = meta.tags.map((blogTag, i) => (
-    <Link key={i} href={`/blog-tags/${blogTag}`}>
-      {blogTag}
-    </Link>
-  ));
+  const blogTags = (
+    <Each
+      of={meta.tags}
+      render={(blogTag, index) => (
+        <Link key={index} href={`/blog-tags/${blogTag}`}>
+          {blogTag}
+        </Link>
+      )}
+    />
+  );
 
   return (
     <>

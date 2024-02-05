@@ -16,7 +16,7 @@ export default async function Posts({ postType }: Props) {
   return (
     <>
       <section className="mt-6 mx-auto w-full">
-        <div className="flex flex-wrap gap-4 md:gap-6 justify-center md:justify-start md:pl-4">
+        <div className="flex flex-wrap gap-4 md:gap-8 justify-center lg:justify-start lg:pl-4">
           <Each
             of={posts}
             render={(post) => (

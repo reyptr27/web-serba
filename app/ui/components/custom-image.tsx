@@ -17,3 +17,4 @@ export default function CustomImage({ src, alt, priority }: Props) {
     </>
   );
 }
+ 

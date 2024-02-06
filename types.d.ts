@@ -3,7 +3,7 @@ type Meta = {
   title: string;
   date: string;
   tags: string[];
-  image?: string;
+  image: string;
 };
 
 type Post = {

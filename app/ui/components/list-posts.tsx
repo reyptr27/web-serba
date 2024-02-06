@@ -12,11 +12,13 @@ export default function ListPosts({ post, postType }: Props) {
   const { id, title, date, image } = post;
   const formattedDate = getFormattedDate(date);
 
+  console.log(image)
+
   return (
     <>
       <div className="w-full p-4 bg-gray-50 dark:bg-[#091a28] border border-[#e2ecec] dark:border-[#0d2538] rounded-xl lg:transform transition-all lg:hover:-translate-y-2 duration-300 shadow-lg lg:hover:shadow-2xl">
         <Link href={`/${postType}/${id}`}>
-          <Image className="h-40 w-72 md:w-48 lg:w-52 object-fit rounded-xl" src={image || "/no-image.svg"} width={0} height={0} alt={title} priority={true} unoptimized />
+          <Image className="h-40 w-72 md:w-48 lg:w-52 object-fit rounded-xl" src={image} width={0} height={0} alt={title} priority={true} unoptimized />
         </Link>
         <div className="p-2">
           <Link href={`/${postType}/${id}`}>
